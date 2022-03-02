@@ -1,0 +1,306 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+.blinking {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-animation: 1s blink ease infinite;
+    -moz-animation: 1s blink ease infinite;
+    -ms-animation: 1s blink ease infinite;
+    -o-animation: 1s blink ease infinite;
+    animation: 1s blink ease infinite;
+}
+
+#bios {
+    height: auto;
+    display: block;
+    width: auto;
+    margin-left: max(10px, 2.5vw);
+    margin-right: max(10px, 2.5vw);
+    color: white;
+}
+
+#bio-1 {
+    font-family: 'IM Fell Double Pica', serif;
+}
+
+#bio-2 {
+    font-family: 'IM Fell Double Pica', serif;
+}
+
+.bio-name {
+    font-size: xx-large;
+}
+
+#bios-board {
+    width: 100%;
+    padding: 15px 0px;
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+}
+
+.bio-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.bio-protrait {
+    width: 100px;
+    height: 100px;
+    margin-right: 100px;
+    border-radius: 20px;
+}
+
+.center-container {
+    display: flexbox;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.centered {
+    margin: auto;
+}
+
+.centered-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#foot-note {
+    margin-top: max(20px, 5vh);
+    margin-left: max(10px, 2.5vw);
+    margin-right: max(10px, 2.5vw);
+    display: block;
+    font-family: 'IM Fell Double Pica', serif;
+    text-align: right;
+}
+
+#foot-note a {
+    color: white;
+    text-decoration: underline;
+    font-family: 'IM Fell Double Pica', serif;
+    text-decoration-thickness: 2px;
+}
+
+#foot-note a:hover {
+    text-underline-offset: 5px;
+    text-decoration-thickness: 3px;
+}
+
+#google-form {
+    text-align: left;
+    font-size: large;
+}
+
+#live-sign {
+    height: auto;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.live-stream {
+    height: auto;
+    aspect-ratio: 16/9;
+    min-width: 0;
+    min-height: 0;
+    display: flexbox;
+}
+
+#live-streams-board {
+    width: 100%;
+    padding: 15px 10px;
+    background: #253044;
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+.live-stream-content {
+    width: 100%;
+    height: auto;
+}
+
+#live-streams {
+    height: 75vh;
+    width: auto;
+    margin-left: max(10px, 2.5vw);
+    margin-right: max(10px, 2.5vw);
+    display: block;
+    position: relative;
+}
+
+#live-streams-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#live-text {
+    font-family: 'Heebo', sans-serif;
+    font-size: 2vw;
+    color: white;
+}
+
+#red-dot {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+}
+
+#title {
+    height: 25vh;
+    position: relative;
+}
+
+#title-text {
+    width: auto;
+    font-family: 'IM Fell Double Pica', serif;
+    font-size: 10vmin;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    white-space: nowrap;
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes blink {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes blink {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes blink {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes blink {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@media screen and (orientation: landscape){
+    #bio-1 {
+        margin-right: max(5px, 1vw);
+        width: 50%;
+    }
+
+    #bio-2 {
+        width: 50%;
+        margin-left: max(5px, 1vw);
+    }
+
+    #live-stream-1 {
+        margin-right: max(5px, 1vw);
+    }
+    
+    #live-stream-2 {
+        margin-left: max(5px, 1vw);
+    }
+
+    #bios-board {
+        flex-direction: row;
+    }
+
+    #live-streams-wrapper {
+        flex-direction: row;
+    }
+
+    .live-stream {
+        width: 50%;
+    }
+}
+
+
+@media screen and (orientation: portrait){
+    #bio-1 {
+        width: 100%;
+        margin-bottom: max(5px, 1vh);
+    }
+
+    #bio-2 {
+        width: 100%;
+        margin-top: max(5px, 1vh);
+    }
+
+    #live-stream-1 {
+        margin-bottom: max(5px, 1vh);
+    }
+    
+    #live-stream-2 {
+        margin-top: max(5px, 1vh);
+    }
+
+    #bios-board {
+        flex-direction: column;
+    }
+
+    #live-streams-wrapper {
+        flex-direction: column;
+    }
+
+    .live-stream {
+        width: 100%;
+    }
+}
