@@ -5,8 +5,10 @@
 #include "Arduino.h"
 #include "CameraMovement.h"
 
+// new comment
+
 // visit here https://www.arduino.cc/en/Hacking/libraryTutorial for a simple tutorial
-// visit https://docs.arduino.cc/hacking/software/ArduinoStyleGuide for the style guide 
+// visit https://docs.arduino.cc/hacking/software/ArduinoStyleGuide for the style guide
 // Basically: 1. avoid #define 2. avoid pointer (besides this->) 3.that's it
 // here is the place for the source code, make sure it matches with the CameraMovement.h file!
 
@@ -21,4 +23,3 @@ int[] CameraMovement:: getNext(){
     // return an array of integer, int[0] is the next angle for the bottom servo (horizontal) (between -90 to 90)
     // int[1] is the next angle for the top servo (vertical) (between 0 to 90)  -JC
 }
-
