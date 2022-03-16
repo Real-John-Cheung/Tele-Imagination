@@ -38,6 +38,9 @@ CameraMovement:: CameraMovement(int v, int h){
 
     printf(result);
 
+    h = result;
+    v = result / 10;
+
     this->current_horizontalcurrent_horizontal = h;
     this->current_vertical = v;
     // personally I think it is a good habit to use the prepend this for any local attribute & function in the class, those this is not required for compile
