@@ -14,12 +14,12 @@ class CameraMovement
     int current_vertical;
     int current_horizontal;
     CameraMovement(int v, int h);
-    // I will suggest have a function like this to be used in the main code 
+    // I will suggest have a function like this to be used in the main code
     // return an array of integer, int[0] is the next angle for the bottom servo (horizontal) (between -90 to 90)
     // int[1] is the next angle for the top servo (vertical) (between 0 to 90)  -JC
     int[] getNext();
   private:
-    // provate attributes are only visiable for functions and subclass inside this class
+    // private attributes are only visible for functions and subclass inside this class
 };
 
 #endif
