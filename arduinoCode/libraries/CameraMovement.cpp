@@ -2,12 +2,12 @@
   the source code
 */
 
-#include "Arduino.h"#include "CameraMovement.h"
+#include "Arduino.h"
+#include "CameraMovement.h"
 
 //libraries needed for sin function and printing, apparently
 #include "stdio.h"      /* printf */
 #include "math.h"       /* sin */
-#define PI 3.14159265
 
 //libs needed for time
 #include "chrono"
@@ -21,6 +21,7 @@
 // visit https://docs.arduino.cc/hacking/software/ArduinoStyleGuide for the style guide
 // Basically: 1. avoid #define 2. avoid pointer (besides this->) 3.that's it
 // here is the place for the source code, make sure it matches with the CameraMovement.h file!
+double CameraMovement:: _PI = 3.14159;
 
 CameraMovement:: CameraMovement(int v, int h){
     // this is the constructor that initialize the instance when a new instance is created

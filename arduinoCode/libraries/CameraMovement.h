@@ -4,6 +4,14 @@
 #ifndef CameraMovement_h
 #define CameraMovement_h
 
+//libraries needed for sin function and printing, apparently
+#include "stdio.h"      /* printf */
+#include "math.h"       /* sin */
+//libs needed for time
+#include "chrono"
+#include "iostream"
+#include "sys/time.h"
+#include "ctime"
 #include "Arduino.h"
 // visit here https://www.arduino.cc/en/Hacking/libraryTutorial for a simple tutorial
 // .h file is the header file, it should list out all the attributes and functions in the class
@@ -19,6 +27,7 @@ class CameraMovement
     // int[1] is the next angle for the top servo (vertical) (between 0 to 90)  -JC
     int[] getNext();
   private:
+    static double _PI;
     // private attributes are only visible for functions and subclass inside this class
 };
 
