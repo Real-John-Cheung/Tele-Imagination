@@ -1,0 +1,5 @@
+Loading .env environment variables...
+altgraph==0.17.2
+macholib==1.16
+modulegraph==0.19.2
+py2app==0.27
