@@ -13,13 +13,20 @@ class CameraMovement
     // public attributes and methods are "visiable" for other class and function
     int current_vertical;
     int current_horizontal;
+    
     CameraMovement(int v, int h);
     // I will suggest have a function like this to be used in the main code
     // return an array of integer, int[0] is the next angle for the bottom servo (horizontal) (between -90 to 90)
     // int[1] is the next angle for the top servo (vertical) (between 0 to 90)  -JC
-    int[] getNext();
+    void getNext(int arr[]);
   private:
-    static double _PI;
+    static double _PI;    
+    unsigned long myTime;
+    float mapf;
+    unsigned long randTime;
+    int randTimeBegin;
+    int randTimeCurrent;
+    int current[];
     // private attributes are only visible for functions and subclass inside this class
 };
 
