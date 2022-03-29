@@ -2,17 +2,20 @@
   the source code
 */
 
-#include "Arduino.h"#include "CameraMovement.h"
+#include "Arduino.h"
+#include "CameraMovement.h"
 
 //libraries needed for sin function and printing, apparently
 #include "stdio.h"      /* printf */
 #include "math.h"       /* sin */
 
 //libs needed for time
-#include "chrono"
+/*#include "chrono"
 #include "iostream"
 #include "sys/time.h"
-#include "ctime"
+#include "ctime"*/
+
+
 
 //add another comment
 
@@ -20,34 +23,44 @@
 // visit https://docs.arduino.cc/hacking/software/ArduinoStyleGuide for the style guide
 // Basically: 1. avoid #define 2. avoid pointer (besides this->) 3.that's it
 // here is the place for the source code, make sure it matches with the CameraMovement.h file!
-double CameraMovement:: _PI = 3.14159265;
+//double CameraMovement:: _PI = 3.14159265;
 
-CameraMovement:: CameraMovement(int v, int h){
-    // this is the constructor that initialize the instance when a new instance is created
-    // I guess it makes sense to use some sort of random function or use sin/cos
-    // but as a seed we can use the time in milis and store it as unsigned long
-
-    // starting to count the time in seconds
-    time_t elapsedseconds = time();
-
-    int param = elapsedseconds; /* seed for the sin calculation */
-    int result; /* stores the result of the calculation */
-
-    // calculating the sin function
-    result = sin (param*_PI/180);
-
-    printf(result);
-
-    h = result;
-    v = result /10;
-
-    this->current_horizontalcurrent_horizontal = h;
-    this->current_vertical = v;
-    // personally I think it is a good habit to use the prepend this for any local attribute & function in the class, those this is not required for compile
+CameraMovement::CameraMovement(int v, int h){
+    current[0] =0;
+    current[1] =0;
 }
 
 
-int[] CameraMovement:: getNext(){
-    // return an array of integer, int[0] is the next angle for the bottom servo (horizontal) (between -90 to 90)
-    // int[1] is the next angle for the top servo (vertical) (between 0 to 90)  -JC
+void CameraMovement::getNext(int arr[]){
+  int currentv= current[0];
+  int currenth = current[1];
+
+      // do sth to update arr[]
+      myTime = millis();
+      unsigned long randTime = randomSeed(myTime);
+      // after xy miliseconds multiply randTime * -1
+      sin(myTime);
+
+      //get the value of the random number at time of read and at time of beginning
+      randTimeBegin = 0;
+      randTimeCurrent = randTime; 
+
+      //map randtimeCurrent and -Begin to the max min angle that the robots allow to
+      map servoBigAngle (randTimeBegin, RandTimeCurrent 
+      //can I limit the overflow to another value?
+      // use if value myTime=0
+      arr[0] = randTime * (-1);
+      arr[1] = randTime *
+      
+      
+  
+  current[0] = arr[0];
+  current[1] = arr[1];
+  //current[] = arr[];
+}
+
+float CameraMovement::mapf(){
+  float mapf(long x, long in_min, long in_max, long out_min, long out_max){
+    return (float) (x-in_min) * (out_max-out_min) / (float)(in_max-in_min)+out_min;
+  }
 }
