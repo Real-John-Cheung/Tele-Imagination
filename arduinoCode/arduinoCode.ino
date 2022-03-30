@@ -1,5 +1,6 @@
 // based on https://stackoverflow.com/questions/60029614/esp32-cam-stream-in-opencv-python
 // using the esp32cam library by yoursunny https://github.com/yoursunny/esp32cam 
+// request: esp32 v2.02 https://github.com/espressif/arduino-esp32/releases/tag/2.0.2 
 #include <ESP32Servo.h>
 #include "CameraMovement.h"
 #include <esp32cam.h>
