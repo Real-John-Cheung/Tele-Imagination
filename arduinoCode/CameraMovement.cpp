@@ -32,35 +32,33 @@ CameraMovement::CameraMovement(int v, int h){
 
 
 void CameraMovement::getNext(int arr[]){
-  int currentv= current[0];
-  int currenth = current[1];
+  // int currentv= current[0];
+  // int currenth = current[1];
 
-      // do sth to update arr[]
-      myTime = millis();
-      unsigned long randTime = randomSeed(myTime);
-      // after xy miliseconds multiply randTime * -1
-      sin(myTime);
+  //     // do sth to update arr[]
+  //     myTime = millis();
+  //     unsigned long randTime = randomSeed(myTime);
+  //     // after xy miliseconds multiply randTime * -1
+  //     sin(myTime);
 
-      //get the value of the random number at time of read and at time of beginning
-      randTimeBegin = 0;
-      randTimeCurrent = randTime; 
+  //     //get the value of the random number at time of read and at time of beginning
+  //     randTimeBegin = 0;
+  //     randTimeCurrent = randTime; 
 
-      //map randtimeCurrent and -Begin to the max min angle that the robots allow to
-      map servoBigAngle (randTimeBegin, RandTimeCurrent 
-      //can I limit the overflow to another value?
-      // use if value myTime=0
-      arr[0] = randTime * (-1);
-      arr[1] = randTime *
+  //     //map randtimeCurrent and -Begin to the max min angle that the robots allow to
+  //     map servoBigAngle (randTimeBegin, RandTimeCurrent 
+  //     //can I limit the overflow to another value?
+  //     // use if value myTime=0
+  //     arr[0] = randTime * (-1);
+  //     arr[1] = randTime *
       
       
   
-  current[0] = arr[0];
-  current[1] = arr[1];
-  //current[] = arr[];
+  // current[0] = arr[0];
+  // current[1] = arr[1];
+  // //current[] = arr[];
 }
 
-float CameraMovement::mapf(){
-  float mapf(long x, long in_min, long in_max, long out_min, long out_max){
-    return (float) (x-in_min) * (out_max-out_min) / (float)(in_max-in_min)+out_min;
-  }
+float CameraMovement::mapf(long x, long in_min, long in_max, long out_min, long out_max){
+  return (float) (x-in_min) * (out_max-out_min) / (float)(in_max-in_min)+out_min;
 }

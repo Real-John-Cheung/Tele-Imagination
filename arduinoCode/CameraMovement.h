@@ -22,11 +22,11 @@ class CameraMovement
   private:
     static double _PI;    
     unsigned long myTime;
-    float mapf;
     unsigned long randTime;
     int randTimeBegin;
     int randTimeCurrent;
     int current[];
+    float mapf(long x, long in_min, long in_max, long out_min, long out_max);
     // private attributes are only visible for functions and subclass inside this class
 };
 

@@ -1,31 +1,38 @@
 // based on https://stackoverflow.com/questions/60029614/esp32-cam-stream-in-opencv-python
-#include <Servo.h>
+// using the esp32cam library by yoursunny https://github.com/yoursunny/esp32cam 
+#include <ESP32Servo.h>
 #include "CameraMovement.h"
 #include <esp32cam.h>
 #include <WebServer.h>
 #include <WiFi.h>
 
-const int bigPin = 5;   // TBD
-const int smallPin = 6; // TBD
-const int servoMoveGap = 100; //TBD
+const int bigPin = 14;   // TBD
+const int smallPin = 15; // TBD
+const int DUMMYPIN1 = 12;
+const int DUMMYPIN2 = 13;
+const int servoMoveGap = 100; // TBD
 unsigned long timer = 0;
 
-const char *WIFI_SSID = "";
-const char *WIFI_PASS = "";
+const char* WIFI_SSID = "";
+const char* WIFI_PASS = "";
 
 WebServer server(80);
 
 static auto loRes = esp32cam::Resolution::find(320, 640);
 static auto hiRes = esp32cam::Resolution::find(800, 600);
 
-int *servoArr[2] = {0, 0};
+int servoArr[2] = {0, 0};
 CameraMovement camMo();
-Servo big();
-Servo small();
+Servo dummy1;
+Servo dummy2;
+Servo big;
+Servo small;
 
 void setup()
 {
   // servo
+  dummy1.attach(DUMMYPIN1);
+  dummy2.attach(DUMMYPIN2);
   big.attach(bigPin);
   small.attach(smallPin);
 
@@ -47,7 +54,7 @@ void setup()
 
   WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
-  WIFI.begin(WIFI_SSID, WIFI_PASS);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
@@ -81,7 +88,7 @@ void loop()
 
 void cameraMove()
 {
-  camMo.getNext(servoArr);
+  //camMo.getNext(servoArr);
   big.write(servoArr[0]);
   small.write(servoArr[1]);
 }
