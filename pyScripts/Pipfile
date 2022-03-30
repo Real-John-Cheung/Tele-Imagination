@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 py2app = "*"
+numpy = "*"
+opencv-python = "*"
 
 [dev-packages]
 
