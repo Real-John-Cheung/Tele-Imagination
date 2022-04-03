@@ -23,7 +23,7 @@ static auto loRes = esp32cam::Resolution::find(320, 640);
 static auto hiRes = esp32cam::Resolution::find(800, 600);
 
 int servoArr[2] = {0, 0};
-CameraMovement camMo();
+CameraMovement camMo;
 Servo dummy1;
 Servo dummy2;
 Servo big;
