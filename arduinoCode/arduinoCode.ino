@@ -21,6 +21,7 @@ WebServer server(80);
 
 static auto loRes = esp32cam::Resolution::find(320, 640);
 static auto hiRes = esp32cam::Resolution::find(800, 600);
+esp32cam::Resolution initialResolution;
 
 int servoArr[2] = {0, 0};
 CameraMovement camMo;
@@ -43,15 +44,26 @@ void setup()
   Serial.println();
   {
     using namespace esp32cam;
+    initialResolution = Resolution::find(1024, 768);
+
     Config cfg;
     cfg.setPins(pins::AiThinker);
-    cfg.setResolution(hiRes);
-    cfg.setBufferCount(2);
+    // cfg.setResolution(hiRes);
+    // cfg.setBufferCount(2);
+    cfg.setResolution(initialResolution);
     cfg.setJpeg(80);
 
     bool ok = Camera.begin(cfg);
-    Serial.println(ok ? "OK" : "CamFail");
+    // Serial.println(ok ? "OK" : "CamFail");
+     if (!ok) {
+      Serial.println("camera initialize failure");
+      delay(5000);
+      ESP.restart();
+    }
+    Serial.println("camera initialize success");
   }
+
+  delay(2000);
 
   WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
@@ -80,6 +92,7 @@ void setup()
 
 void loop()
 {
+  delay(1);
   server.handleClient();
   if (millis() - timer > servoMoveGap) {
     cameraMove();
