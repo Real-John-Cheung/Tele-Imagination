@@ -20,7 +20,7 @@ model_loaded_i = 0
 model_to_load = model_path + models[model_loaded_i]
 
 net = cv2.dnn.readNetFromTorch(model_to_load)
-print('loaded model 0')
+print('loaded model: ' + model_to_load)
 
 
 def get_model_no():
@@ -30,9 +30,10 @@ def load_model(i):
     if i > len(models) - 1 or i < 0:
         raise Exception('invalid model index')
     else:
+        model_loaded_i = i
         model_to_load = model_path + models[model_loaded_i]
         net = cv2.dnn.readNetFromTorch(model_to_load)        
-        print('load model' + i)
+        print('loaded model: ' + model_to_load)
 
 def resize_img(img, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None

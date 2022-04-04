@@ -3,6 +3,10 @@ import cv2
 import yolo
 import styleTrans
 
+n = styleTrans.get_model_no()
+print(n)
+styleTrans.load_model(n-2)
+
 while True:
     img = imgFunctions.getImage()
     stylized = styleTrans.predict(img)
