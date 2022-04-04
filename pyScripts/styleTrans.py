@@ -12,11 +12,14 @@ for f in sorted(os.listdir(model_path)):
 if len(models) == 0:
     raise Exception('error in loading models')
 
+model_loaded_i = -1
 
 print('loading init model')
 
-load_model(0)
+model_loaded_i = 0
+model_to_load = model_path + models[model_loaded_i]
 
+net = cv2.dnn.readNetFromTorch(model_to_load)
 print('loaded model 0')
 
 
@@ -27,7 +30,7 @@ def load_model(i):
     if i > len(models) - 1 or i < 0:
         raise Exception('invalid model index')
     else:
-        model_to_load = model_path + models[i]
+        model_to_load = model_path + models[model_loaded_i]
         net = cv2.dnn.readNetFromTorch(model_to_load)        
         print('load model' + i)
 
