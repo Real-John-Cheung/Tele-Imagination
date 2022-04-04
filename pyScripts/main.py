@@ -13,4 +13,4 @@ while True:
     imgFunctions.showImage("Main", stylized)
     print(yolo.getObjects(img))
     if ord('q')==cv2.waitKey(50):
-        imgFunctions.closeWindow("Main")
+        imgFunctions.close("Main")
