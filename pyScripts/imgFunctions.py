@@ -12,7 +12,7 @@ def getImage():
     # @return : an image
     imgResp = urllib.request.urlopen(url) # get respone from server
     imgNp = np.array(bytearray(imgResp.read()),dtype=np.uint8) # convert to NP array
-    img = cv2.imdecode(imgNp, -1)
+    img = cv2.imdecode(imgNp, cv2.IMREAD_COLOR)
     return img # give out the image format data
 
 def showImage(window,img):
