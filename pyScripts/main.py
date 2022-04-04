@@ -14,3 +14,4 @@ while True:
     print(yolo.getObjects(img))
     if ord('q')==cv2.waitKey(50):
         imgFunctions.close("Main")
+        break

@@ -23,6 +23,7 @@ def showImage(window,img):
 
 def close(window):
     if window is not None:
+        print("closing " + window)
         cv2.destroyWindow(window)
     else:
         cv2.destroyAllWindows()

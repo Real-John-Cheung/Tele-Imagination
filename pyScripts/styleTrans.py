@@ -16,7 +16,7 @@ model_loaded_i = -1
 
 print('loading init model')
 
-model_loaded_i = 0
+model_loaded_i = 1
 model_to_load = model_path + models[model_loaded_i]
 
 net = cv2.dnn.readNetFromTorch(model_to_load)
