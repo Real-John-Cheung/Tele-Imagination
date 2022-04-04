@@ -13,6 +13,6 @@ def getObjects(img):
     classIds, scores, boxes = model.detect(img, confThreshold=0.6, nmsThreshold=0.4)
     objList = []
     for (classId, score, box) in zip(classIds, scores, boxes):
-        objList.append([classes[classId[0]], score])
+        objList.append([classes[classIds[0]], score])
         #[["Oriange", 0.36],...]
     return objList
