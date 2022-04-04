@@ -11,32 +11,38 @@
 static const char *WIFI_SSID = "FLYNN-LAPTOP";
 static const char *WIFI_PASS = "87654321";
 
-const int bigPin = 14;   // TBD
-const int smallPin = 15; // TBD
-const int DUMMYPIN1 = 12;
-const int DUMMYPIN2 = 13;
-const int servoMoveGap = 100; // TBD
-unsigned long timer = 0;
+//const int DUMMYPIN1 = 12;
+//const int DUMMYPIN2 = 13;
+//const int bigPin = 14;   // TBD
+//const int smallPin = 15; // TBD
+//
+//const int servoMoveGap = 500; // TBD
+//unsigned long timer = 0;
 
 esp32cam::Resolution initialResolution;
 
 WebServer server(80);
-
-int servoArr[2] = {0, 0};
-CameraMovement camMo;
-Servo dummy1;
-Servo dummy2;
-Servo big;
-Servo small;
+//
+//int servoArr[2] = {0, 0};
+//CameraMovement camMo;
+//Servo dummy1;
+//Servo dummy2;
+//Servo big;
+//Servo small;
 
 void setup()
 {
 
-  // servo
-  dummy1.attach(DUMMYPIN1);
-  dummy2.attach(DUMMYPIN2);
-  big.attach(bigPin);
-  small.attach(smallPin);
+//  // servo
+//  big.setPeriodHertz(50);
+//  small.setPeriodHertz(50);
+//  dummy1.attach(DUMMYPIN1, 1000, 2000);
+//  dummy2.attach(DUMMYPIN2, 1000, 2000);
+//  big.attach(bigPin, 1000, 2000);
+//  small.attach(smallPin, 1000, 2000);
+//
+//  big.write(0);
+//  small.write(0);
 
   //cam
   Serial.begin(115200);
@@ -86,15 +92,17 @@ void setup()
 void loop()
 {
   server.handleClient();
-  if (millis() - timer > servoMoveGap) {
-    cameraMove();
-    timer = millis();
-  }
+//  if (millis() - timer > servoMoveGap) {
+//    cameraMove();
+//    timer = millis();
+//  }
 }
 
-void cameraMove()
-{
-  //camMo.getNext(servoArr);
-  big.write(servoArr[0]);
-  small.write(servoArr[1]);
-}
+//void cameraMove()
+//{
+//  //camMo.getNext(servoArr);
+//  //Serial.println(servoArr[0]);
+//  //Serial.println(servoArr[1]);
+//  big.write(servoArr[0]);
+//  small.write(servoArr[1]);
+//}

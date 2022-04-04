@@ -4,12 +4,12 @@
 
 static const char FRONTPAGE[] = R"EOT(
 <!doctype html>
-<title>esp</title>
-<body>hell</body>
+<title>e</title>
+<body>hello</body>
 )EOT";
 
 static void
-serveStill()
+serveStill(bool wantBmp)
 {
   auto frame = esp32cam::capture();
   if (frame == nullptr) {
@@ -20,8 +20,18 @@ serveStill()
   Serial.printf("capture() success: %dx%d %zub\n", frame->getWidth(), frame->getHeight(),
                 frame->size());
 
+  if (wantBmp) {
+    if (!frame->toBmp()) {
+      Serial.println("toBmp() failure");
+      server.send(500, "text/plain", "convert to BMP error\n");
+      return;
+    }
+    Serial.printf("toBmp() success: %dx%d %zub\n", frame->getWidth(), frame->getHeight(),
+                  frame->size());
+  }
+
   server.setContentLength(frame->size());
-  server.send(200, "image/jpeg");
+  server.send(200, wantBmp ? "image/bmp" : "image/jpeg");
   WiFiClient client = server.client();
   frame->writeTo(client);
 }
@@ -46,11 +56,22 @@ addRequestHandlers()
     server.sendContent(FRONTPAGE, sizeof(FRONTPAGE));
   });
 
+  server.on("/robots.txt", HTTP_GET,
+            [] { server.send(200, "text/html", "User-Agent: *\nDisallow: /\n"); });
+
+  server.on("/resolutions.csv", HTTP_GET, [] {
+    StreamString b;
+    for (const auto& r : esp32cam::Camera.listResolutions()) {
+      b.println(r);
+    }
+    server.send(200, "text/csv", b);
+  });
+
   server.on(UriBraces("/{}x{}.{}"), HTTP_GET, [] {
     long width = server.pathArg(0).toInt();
     long height = server.pathArg(1).toInt();
     String format = server.pathArg(2);
-    if (width == 0 || height == 0 || !(format == "jpg" || format == "mjpeg")) {
+    if (width == 0 || height == 0 || !(format == "bmp" || format == "jpg" || format == "mjpeg")) {
       server.send(404);
       return;
     }
@@ -73,8 +94,10 @@ addRequestHandlers()
     }
     Serial.printf("changeResolution(%ld,%ld) success\n", width, height);
 
-    if (format == "jpg") {
-      serveStill();
+    if (format == "bmp") {
+      serveStill(true);
+    } else if (format == "jpg") {
+      serveStill(false);
     } else if (format == "mjpeg") {
       serveMjpeg();
     }
