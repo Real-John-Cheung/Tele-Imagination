@@ -5,12 +5,22 @@ import styleTrans
 
 n = styleTrans.get_model_no()
 current = 1
+alpha = 0
 
 while True:
     img = imgFunctions.getImage()
     stylized = styleTrans.predict(img)
-    imgFunctions.showImage("Main", stylized)
+
+    if alpha > 0 and alpha < 1:
+        merged = cv2.addWeighted(stylized, alpha, img, 1 - alpha, 0)
+        imgFunctions.showImage("Main", merged)
+    elif alpha == 0:
+        imgFunctions.showImage("Main", img)
+    elif alpha == 1:
+        imgFunctions.showImage("Main", stylized)
+    
     print(yolo.getObjects(img))
+    
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         imgFunctions.close("Main")
