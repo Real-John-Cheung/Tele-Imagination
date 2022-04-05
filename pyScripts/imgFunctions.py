@@ -5,8 +5,8 @@ import numpy as np
 
 ip = '192.168.8.100'
 
-# url='http://' + ip + '/cam-hi.jpg'
-url = 'https://github.githubassets.com/images/modules/signup/gc_banner_light.png'
+url='http://' + ip + '/cam-hi.jpg'
+# url = 'https://github.githubassets.com/images/modules/signup/gc_banner_light.png'
 
 def getImage():
     # @param : none

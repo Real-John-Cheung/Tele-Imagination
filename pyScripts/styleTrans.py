@@ -32,6 +32,7 @@ def load_model(i):
     else:
         model_loaded_i = i
         model_to_load = model_path + models[model_loaded_i]
+        global net
         net = cv2.dnn.readNetFromTorch(model_to_load)        
         print('loaded model: ' + model_to_load)
 
