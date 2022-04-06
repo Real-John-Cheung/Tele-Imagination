@@ -69,4 +69,4 @@ def predict(img):
 
     res = resize_img(out, cv2.INTER_LINEAR, width=oriw)
 
-    return res
+    return cv2.normalize(res, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)

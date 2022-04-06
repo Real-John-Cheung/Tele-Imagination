@@ -3,10 +3,10 @@ import urllib.request
 import cv2
 import numpy as np
 
-ip = '192.168.8.100'
+ip = '192.168.137.109'
 
 url='http://' + ip + '/640x480.jpg'
-# url = 'https://github.githubassets.com/images/modules/signup/gc_banner_light.png'
+#url = 'https://github.githubassets.com/images/modules/signup/gc_banner_light.png'
 
 def getImage():
     # @param : none
