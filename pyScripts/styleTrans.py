@@ -36,7 +36,7 @@ def load_model(i):
         net = cv2.dnn.readNetFromTorch(model_to_load)        
         print('loaded model: ' + model_to_load)
 
-def resize_img(img, width=None, height=None, inter=cv2.INTER_AREA):
+def resize_img(img, inter=cv2.INTER_AREA, width=None, height=None):
     dim = None
     h, w = img.shape[:2]
 
@@ -53,7 +53,7 @@ def resize_img(img, width=None, height=None, inter=cv2.INTER_AREA):
 
 def predict(img):
     orih, oriw = img.shape[:2]
-    img_copy = resize_img(img, width = 600)
+    img_copy = resize_img(img, cv2.INTER_AREA, width = 600)
     h, w = img_copy.shape[:2]
     blob = cv2.dnn.blobFromImage(img_copy, 1.0, (w, h),
         (103.939, 116.779, 123.680), swapRB=False, crop=False)
@@ -67,6 +67,6 @@ def predict(img):
     out /= 255.0
     out = out.transpose(1, 2, 0)
 
-    res = resize_img(out, width=oriw)
+    res = resize_img(out, cv2.INTER_LINEAR, width=oriw)
 
     return res

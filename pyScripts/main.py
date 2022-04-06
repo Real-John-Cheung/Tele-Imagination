@@ -35,14 +35,24 @@ def get_alpha(gap_ms, duration_ms, highcut):
         return 1
     return mapf(s, 0, highcut, 0, 1)
 
+def get_merged(s, o, a):
+    s_h, s_w = s.shape
+    o_h, o_w = o.shape
+    if s_h == o_h and s_w == o_w:
+        return cv2.addWeighted(s, a, o, 1-a, 0)
+    else:
+        r_o = styleTrans.resize_img(o, cv2.INTER_LINEAR, s_h, s_w)
+        return cv2.addWeighted(s, a, r_o, 1-a, 0)
+
+
 while True:
     img = imgFunctions.getImage()
     stylized = styleTrans.predict(img)
 
-    get_alpha(gap, dur, 0.6)
+    alpha = get_alpha(gap, dur, 0.6)
 
     if alpha > 0 and alpha < 1:
-        merged = cv2.addWeighted(stylized, alpha, img, 1 - alpha, 0)
+        merged = get_merged(stylized, img, alpha)
         imgFunctions.showImage("Main", merged)
     elif alpha == 0:
         imgFunctions.showImage("Main", img)
