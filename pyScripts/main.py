@@ -40,12 +40,12 @@ def get_alpha(gap_ms, duration_ms, highcut, db = False):
             return mapf(s, 0, highcut, 0, 1)
 
 def get_merged(s, o, a):
-    s_h, s_w = s.shape
-    o_h, o_w = o.shape
+    s_h, s_w, s_a = s.shape
+    o_h, o_w, o_a = o.shape
     if s_h == o_h and s_w == o_w:
         return cv2.addWeighted(s, a, o, 1-a, 0)
     else:
-        r_o = styleTrans.resize_img(o, cv2.INTER_LINEAR, s_h, s_w)
+        r_o = cv2.resize(o, (s_w, s_h))
         return cv2.addWeighted(s, a, r_o, 1-a, 0)
 
 
