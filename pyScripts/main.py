@@ -16,24 +16,30 @@ dur = 2000
 def mapf(x, a, b, c, d):
     return ((x-a)/(b-a)) * (d-c) + c
 
-def get_alpha(gap_ms, duration_ms, highcut):
+def get_alpha(gap_ms, duration_ms, highcut, db = False):
     if duration_ms >= gap_ms:
         raise Exception('are u nut?')
     t = time.time()
     t = math.floor(t)
     z = t % gap_ms
+    if db: 
+        print(z)
     if z > duration_ms: 
         global gap, dur
         if (gap - z) < 500: 
             gap = gap * random.randrange(0.8, 1.2)
             dur = dur * random.randrange(0.8, 1.2)
             while (dur >= gap):
-                dur = dur * random.randrange(0.8, 1.2)
+                dur = dur * random.randrange(0.8, 1)
         return 0
-    s = abs(math.sin(z/duration_ms))
-    if s > highcut:
-        return 1
-    return mapf(s, 0, highcut, 0, 1)
+    else:
+        s = abs(math.sin(z/duration_ms))
+        if db: 
+            print(s)
+        if s > highcut:
+            return 1
+        else:
+            return mapf(s, 0, highcut, 0, 1)
 
 def get_merged(s, o, a):
     s_h, s_w = s.shape
