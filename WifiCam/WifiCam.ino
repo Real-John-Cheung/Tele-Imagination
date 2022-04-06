@@ -85,7 +85,7 @@ void setup()
   Serial.print("http://");
   Serial.println(WiFi.localIP());
 
-  addRequestHandlers();
+  addRequestHandlers(false);
   server.begin();
 }
 

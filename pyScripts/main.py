@@ -1,11 +1,30 @@
+from ast import For
 import imgFunctions 
 import cv2
 import yolo
 import styleTrans
+import time
+import math
 
 n = styleTrans.get_model_no()
 current = 1
 alpha = 0
+
+def mapf(x, a, b, c, d):
+    return ((x-a)/(b-a)) * (d-c) + c
+
+def get_alpha(gap_ms, duration_ms, highcut):
+    if duration_ms >= gap_ms:
+        raise Exception('are u nut?')
+    t = time.time()
+    t = math.floor(t)
+    z = t % gap_ms
+    if z > duration_ms: 
+        return 0
+    s = abs(math.sin(z/duration_ms))
+    if s > highcut:
+        return 1
+    return mapf(s, 0, highcut, 0, 1)
 
 while True:
     img = imgFunctions.getImage()

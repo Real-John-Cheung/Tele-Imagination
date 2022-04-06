@@ -10,6 +10,6 @@ extern esp32cam::Resolution initialResolution;
 extern WebServer server;
 
 void
-addRequestHandlers();
+addRequestHandlers(bool dbug);
 
 #endif // WIFICAM_HPP
