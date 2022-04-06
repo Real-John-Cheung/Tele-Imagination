@@ -1,4 +1,3 @@
-from numpy import dtype
 import imgFunctions 
 import cv2
 import yolo
@@ -6,6 +5,7 @@ import styleTrans
 import time
 import math
 import random
+import api
 
 n = styleTrans.get_model_no()
 current = 1
@@ -15,6 +15,10 @@ dur_init = 10000
 gap = gap_init
 dur = dur_init
 ingap = False
+green = (198, 248, 220)
+white = (255, 255, 255)
+tl = (40, 390)
+br = (440, 640)
 
 def mapf(x, a, b, c, d):
     return ((x-a)/(b-a)) * (d-c) + c
@@ -46,6 +50,47 @@ def get_merged(s, o, a):
         r_o = cv2.resize(o, (s_w, s_h))
         return cv2.addWeighted(s, a, r_o, 1-a, 0, dtype = cv2.CV_8U)
 
+def draw_text(img, me, data):
+    l = data
+    if len(data) > 5:
+        l = data[-5:]
+    sum = 0
+    top, left  = tl
+    bottom, right = br
+    for line in reversed(l):
+        sender = line['sender']
+        cont = line['content']
+        font = cv2.FONT_HERSHEY_SIMPLEX 
+        fontscale = 0.7
+        thickness = 1
+        retval, baseLine = cv2.getTextSize(cont,fontFace=font,fontScale=fontscale, thickness=thickness)
+        if sender == me:
+            re_b = bottom - sum 
+            re_t = bottom - sum - (retval[1] + 20)
+            re_r = right
+            re_l = right - (retval[0] + 20)
+
+            tx_b = bottom - sum - 10 - baseLine
+            tx_l = re_l + 10
+            cv2.rectangle(img, (re_l, re_t), (re_r, re_b), thickness=-1, color=green)
+            cv2.putText(img, cont, (tx_l, tx_b), fontScale=fontscale, fontFace=font, thickness=thickness, color=(0,0,0) )
+            sum += retval[1] + 20 + 15
+        else:
+            re_b = bottom - sum 
+            re_t = bottom - sum - (retval[1] + 20)
+            re_l = left
+            re_r = re_l+(retval[0] + 20)
+            
+            tx_b = bottom - sum - 10 - baseLine
+            tx_l = re_l + 10
+            cv2.rectangle(img, (re_l, re_t), (re_r, re_b), thickness=-1, color=white)
+            cv2.putText(img, cont, (tx_l, tx_b), fontScale=fontscale, fontFace=font, thickness=thickness, color=(0,0,0) )
+            sum += retval[1] + 20 + 15
+
+        if bottom - sum <= top:
+            break
+
+data = api.get_data()
 
 while True:
     # print(get_alpha(gap, dur, 0.6))
@@ -66,10 +111,13 @@ while True:
 
     if alpha > 0 and alpha < 1:
         merged = get_merged(stylized, img, alpha)
+        draw_text(merged, "A", testdata)
         imgFunctions.showImage("Main", merged)
     elif alpha == 0:
+        draw_text(img, "A", testdata)
         imgFunctions.showImage("Main", img)
     elif alpha == 1:
+        draw_text(stylized, "A", testdata)
         imgFunctions.showImage("Main", stylized)
     
     if len(yolo.getObjects(img)) > 0:

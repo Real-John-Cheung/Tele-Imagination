@@ -10,6 +10,7 @@ opencv-python = "*"
 darknet = "*"
 opencv-python-headless = "*"
 tensorflow = "*"
+requests = "*"
 
 [dev-packages]
 
