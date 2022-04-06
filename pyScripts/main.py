@@ -18,8 +18,7 @@ def mapf(x, a, b, c, d):
 def get_alpha(gap_ms, duration_ms, highcut, db = False):
     if duration_ms >= gap_ms:
         raise Exception('are u nut?')
-    t = time.time()
-    t = math.floor(t)
+    t = round(time.time() * 1000.0)
     z = t % gap_ms
     if db: 
         print(z)
