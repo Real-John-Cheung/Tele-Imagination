@@ -25,10 +25,10 @@ def get_alpha(gap_ms, duration_ms, highcut, db = False):
     if z > duration_ms: 
         global gap, dur
         if (gap - z) < 500: 
-            gap = gap * random.randrange(0.8, 1.2)
-            dur = dur * random.randrange(0.8, 1.2)
+            gap = gap * (random.random() * 0.4 + 0.8)
+            dur = dur * (random.random() * 0.4 + 0.8)
             while (dur >= gap):
-                dur = dur * random.randrange(0.8, 1)
+                dur = dur * (random.random() * 0.2 + 0.8)
         return 0
     else:
         s = abs(math.sin(z/duration_ms))
