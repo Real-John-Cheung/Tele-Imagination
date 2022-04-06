@@ -1,4 +1,3 @@
-from ast import For
 import imgFunctions 
 import cv2
 import yolo
