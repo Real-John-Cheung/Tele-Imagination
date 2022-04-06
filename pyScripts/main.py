@@ -1,3 +1,4 @@
+from numpy import dtype
 import imgFunctions 
 import cv2
 import yolo
@@ -46,7 +47,7 @@ def get_merged(s, o, a):
         return cv2.addWeighted(s, a, o, 1-a, 0)
     else:
         r_o = cv2.resize(o, (s_w, s_h))
-        return cv2.addWeighted(s, a, r_o, 1-a, 0, s)
+        return cv2.addWeighted(s, a, r_o, 1-a, 0, dtype = cv2.CV_32F)
 
 
 while True:
