@@ -8,6 +8,7 @@ import random
 import api
 
 n = styleTrans.get_model_no()
+me = "A"
 current = 1
 alpha = 0
 gap_init = 60000
@@ -90,6 +91,7 @@ def draw_text(img, me, data):
         if bottom - sum <= top:
             break
 
+
 data = api.get_data()
 
 while True:
@@ -111,19 +113,26 @@ while True:
 
     if alpha > 0 and alpha < 1:
         merged = get_merged(stylized, img, alpha)
-        draw_text(merged, "A", testdata)
+        draw_text(merged, me, data)
         imgFunctions.showImage("Main", merged)
     elif alpha == 0:
-        draw_text(img, "A", testdata)
+        draw_text(img, me, data)
         imgFunctions.showImage("Main", img)
     elif alpha == 1:
-        draw_text(stylized, "A", testdata)
+        draw_text(stylized, me, data)
         imgFunctions.showImage("Main", stylized)
     
     if len(yolo.getObjects(img)) > 0:
         print(yolo.getObjects(img))
+        api.write_data(me, yolo.getObjects(img)[0][0])
+        data = api.get_data()
     # print(alpha)
     
+    #update Chat
+    t = round(time.time() * 1000.0)
+    if (t % 5000 < 500):
+        data = api.get_data()
+
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         imgFunctions.close("Main")

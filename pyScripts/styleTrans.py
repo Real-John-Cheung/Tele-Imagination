@@ -12,15 +12,20 @@ for f in sorted(os.listdir(model_path)):
 if len(models) == 0:
     raise Exception('error in loading models')
 
-model_loaded_i = -1
 
-print('loading init model')
+print('loading models')
+nets = []
+
+for i in range(0, len(models)):
+    to_load = model_path + models[i]
+    tn = cv2.dnn.readNetFromTorch(to_load)
+    nets.append(tn)
+print(nets)
 
 model_loaded_i = 1
-model_to_load = model_path + models[model_loaded_i]
 
-net = cv2.dnn.readNetFromTorch(model_to_load)
-print('loaded model: ' + model_to_load)
+net = nets[model_loaded_i]
+print('loaded model: ' + models[model_loaded_i])
 
 
 def get_model_no():
@@ -30,11 +35,10 @@ def load_model(i):
     if i > len(models) - 1 or i < 0:
         raise Exception('invalid model index')
     else:
+        global net, nets, model_loaded_i
         model_loaded_i = i
-        model_to_load = model_path + models[model_loaded_i]
-        global net
-        net = cv2.dnn.readNetFromTorch(model_to_load)        
-        print('loaded model: ' + model_to_load)
+        net = nets[model_loaded_i]
+        print('loaded model: ' + models[model_loaded_i])
 
 def resize_img(img, inter=cv2.INTER_AREA, width=None, height=None):
     dim = None
