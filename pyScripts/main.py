@@ -136,6 +136,8 @@ while True:
         data = api.get_data()
         print("1")
 
+    current_time = round(time.time() * 1000.0)
+
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
         imgFunctions.close("Main")
