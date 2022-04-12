@@ -13,6 +13,8 @@ current = 1
 alpha = 0
 gap_init = 60000
 dur_init = 10000
+sendgap = 5000
+lastSend = 0
 gap = gap_init
 dur = dur_init
 ingap = False
@@ -93,6 +95,7 @@ def draw_text(img, me, data):
 
 
 data = api.get_data()
+current_time = round(time.time() * 1000.0)
 
 while True:
     # print(get_alpha(gap, dur, 0.6))
@@ -122,16 +125,16 @@ while True:
         draw_text(stylized, me, data)
         imgFunctions.showImage("Main", stylized)
     
-    if len(yolo.getObjects(img)) > 0:
-        print(yolo.getObjects(img))
+    if len(yolo.getObjects(img)) > 0 and current_time - lastSend > sendgap:
         api.write_data(me, yolo.getObjects(img)[0][0])
         data = api.get_data()
+        lastSend = current_time
     # print(alpha)
     
     #update Chat
-    t = round(time.time() * 1000.0)
-    if (t % 5000 < 500):
+    if (current_time % 5000 < 500):
         data = api.get_data()
+        print("1")
 
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
