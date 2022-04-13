@@ -6,6 +6,7 @@ import time
 import math
 import random
 import api
+import numpy as np
 
 n = styleTrans.get_model_no()
 me = "A"
@@ -13,7 +14,7 @@ current = 1
 alpha = 0
 gap_init = 60000
 dur_init = 10000
-sendgap = 5000
+sendgap = 7000
 lastSend = 0
 gap = gap_init
 dur = dur_init
@@ -73,8 +74,14 @@ def draw_text(img, me, data):
             re_r = right
             re_l = right - (retval[0] + 20)
 
+            tr_1 = (re_r, re_b - 5)
+            tr_2 = (re_r, re_b + 10)
+            tr_3 = (re_r - 10, re_b - 5)
+            pts = [tr_1, tr_2, tr_3]
+
             tx_b = bottom - sum - 10 - baseLine
             tx_l = re_l + 10
+            cv2.fillPoly(img, np.array([pts]), green)
             cv2.rectangle(img, (re_l, re_t), (re_r, re_b), thickness=-1, color=green)
             cv2.putText(img, cont, (tx_l, tx_b), fontScale=fontscale, fontFace=font, thickness=thickness, color=(0,0,0) )
             sum += retval[1] + 20 + 15
@@ -83,9 +90,17 @@ def draw_text(img, me, data):
             re_t = bottom - sum - (retval[1] + 20)
             re_l = left
             re_r = re_l+(retval[0] + 20)
+
+
+            tr_1 = (re_l, re_b - 5)
+            tr_2 = (re_l, re_b + 10)
+            tr_3 = (re_l + 10, re_b - 5)
+            pts = [tr_1, tr_2, tr_3]
             
             tx_b = bottom - sum - 10 - baseLine
             tx_l = re_l + 10
+            
+            cv2.fillPoly(img, np.array([pts]), white)
             cv2.rectangle(img, (re_l, re_t), (re_r, re_b), thickness=-1, color=white)
             cv2.putText(img, cont, (tx_l, tx_b), fontScale=fontscale, fontFace=font, thickness=thickness, color=(0,0,0) )
             sum += retval[1] + 20 + 15
@@ -134,7 +149,6 @@ while True:
     #update Chat
     if (current_time % 5000 < 500):
         data = api.get_data()
-        print("1")
 
     current_time = round(time.time() * 1000.0)
 

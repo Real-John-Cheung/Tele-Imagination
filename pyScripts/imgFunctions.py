@@ -3,7 +3,7 @@ import urllib.request
 import cv2
 import numpy as np
 
-ip = '192.168.137.46'
+ip = '192.168.137.241'
 
 url='http://' + ip + '/640x480.jpg'
 #url = 'https://github.githubassets.com/images/modules/signup/gc_banner_light.png'
